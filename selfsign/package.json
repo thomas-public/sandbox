@@ -1,0 +1,14 @@
+{
+  "name": "@acrosome/selfsign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "thomas@acrosome.com",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "node-forge": "^0.9.1"
+  }
+}
