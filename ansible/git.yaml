@@ -1,0 +1,21 @@
+#
+# main.yaml
+# Copyright 2020 thomas at acrosome dot com
+#
+---
+-   hosts: localhost
+    gather_facts: false
+
+    tasks:
+    -   name: get git commitid
+        shell: git show -s --format=%H
+        register: git_commit_id
+
+    -   name: get git date
+        shell: git show -s --format=%cd --date=format:'%y%j'
+        register: git_commit_date
+
+    -   debug:
+            msg:
+                commitid: "{{ git_commit_id.stdout }}"
+                date: "{{ git_commit_date.stdout }}"
