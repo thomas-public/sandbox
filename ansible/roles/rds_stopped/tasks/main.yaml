@@ -1,0 +1,44 @@
+-   name: stop rds instance
+    tags: always
+    debug:
+        msg: "region: {{ params.0 }}"
+
+-   set_fact:
+        region: "{{ params.0 }}"
+
+-   name: get rds instance info
+    register: result_rds_instance_info
+    rds_instance_info:
+        region: "{{ region }}"
+
+-   tags: debug, never
+    debug: var=result_rds_instance_info
+
+-   set_fact:
+        items_cluster: "{{ result_rds_instance_info.instances | selectattr('db_instance_status', '==', 'available') | map(attribute='db_cluster_identifier') | select('defined') | list | unique }}"
+        items_instance: "{{ result_rds_instance_info.instances | selectattr('db_instance_status', '==', 'available') | selectattr('db_cluster_identifier', 'undefined') | map(attribute='db_instance_identifier') | list | unique }}"
+
+-   name: debug all items in {{ region }}
+    tags: debug, never
+    debug:
+        msg:
+            instance: "{{ items_instance }}"
+            cluster: "{{ items_cluster }}"
+
+-   name: stop rds instance
+    loop: "{{ items_instance }}"
+    rds_instance:
+        db_instance_identifier: "{{ item }}"
+        region: "{{ region }}"
+        state: stopped
+        wait: no
+
+-   name: stop rds cluster
+    loop: "{{ items_cluster }}"
+    command: aws --region {{ region }} rds stop-db-cluster --db-cluster-identifier {{ item }}
+#     rds_instance:
+#         db_cluster_identifier: "{{ item }}"
+#         db_instance_identifier: ""
+#         region: "{{ region }}"
+#         state: stopped
+#         wait: no

@@ -1,0 +1,22 @@
+-   name: run delete dynamodb table
+    tags: always
+    debug:
+        msg: "region: {{ params.0 }}"
+
+-   set_fact:
+        region: "{{ params.0 }}"
+
+-   name: dynamodb list-tables
+    command: aws --region {{ region }} dynamodb list-tables
+    register: result_list_tables
+
+-   set_fact:
+        items: "{{ (result_list_tables.stdout | from_json).TableNames }}"
+
+-   name: debug all items in {{ region }}
+    tags: debug, never
+    debug: var=items
+
+-   name: delete dynamodb table
+    command: aws --region {{ region }} dynamodb delete-table --table-name {{ item }}
+    loop: "{{ items }}"

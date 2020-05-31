@@ -1,0 +1,31 @@
+-   name: ({{ region }}) delete cloudwatch logs
+    tags: always
+    debug:
+        msg: "region: {{ params.0 }}"
+
+-   set_fact:
+        region: "{{ params.0 }}"
+
+-   name: ({{ region }}) logs describe-log-groups
+    command: "aws --region {{ region }} logs describe-log-groups"
+    register: result_describe_log_groups
+
+-   set_fact:
+        items: "{{ (result_describe_log_groups.stdout | from_json).logGroups | map(attribute='logGroupName') | list }}" #
+
+-   name: ({{ region }}) debug all items
+    tags: debug, never
+    debug: var=items
+
+# -   name: ({{ region }}) process items
+#     command: "aws --region {{ region }} logs delete-log-group --log-group-name {{ item }}"
+#     with_list: "{{ items }}"
+
+-   name: ({{ region }}) delete log groups
+    tags: [ delete, never ]
+    cloudwatchlogs_log_group:
+        profile: "{{ profile }}"
+        region: "{{region}}"
+        state: absent
+        log_group_name: "{{ item }}"
+    with_list: "{{ itemss }}"

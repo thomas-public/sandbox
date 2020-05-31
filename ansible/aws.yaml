@@ -1,0 +1,32 @@
+---
+-   name: aws management
+    hosts: localhost
+    connection: local
+    gather_facts: false
+
+    vars:
+        # ansible_python_interpreter: /usr/bin/python3
+        regions:
+        -   us-east-1
+        -   us-east-2
+        -   us-west-1
+        -   us-west-2
+        -   ap-northeast-1
+
+        ansible_roles:
+        # -   ddb_ondemand
+        # -   ddb_delete
+        -   logs_delete
+        # -   rds_stopped
+        # -   ec2_stopped
+        # -   ec2_terminated
+
+    roles:
+    -   aws_facts
+
+    tasks:
+    -   include_role:
+            name: "{{ params.1 }}"
+        loop: "{{ regions | product(ansible_roles) | list }}"
+        loop_control:
+            loop_var: params

@@ -1,0 +1,33 @@
+-   name: run terminate ec2 instance
+    tags: always
+    debug:
+        msg: "region: {{ params.0 }}"
+
+-   tags: always
+    set_fact:
+        region: "{{ params.0 }}"
+
+-   name: get ec2 instance info
+    tags: always
+    register: result_ec2_instance_info
+    ec2_instance_info:
+        region: "{{ region }}"
+
+-   tags: debug, never
+    debug: var=result_ec2_instance_info
+
+-   set_fact:
+        items: "{{ result_ec2_instance_info.instances | map(attribute='instance_id') | list }}"
+
+-   name: debug all items in {{ region }}
+    tags: debug, never
+    debug:
+        msg:
+            items: "{{ items }}"
+
+-   name: terminate ec2 instance
+    when: items | length > 0
+    ec2_instance:
+        instance_ids: "{{ items }}"
+        region: "{{ region }}"
+        state: terminated
