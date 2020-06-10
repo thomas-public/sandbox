@@ -1,0 +1,16 @@
+gcloud pubsub subscriptions create projects/iot-watertank/subscriptions/my-subscription --topic=projects/iot-watertank/topics/tank-b1
+
+gcloud pubsub subscriptions pull --auto-ack projects/iot-watertank/subscriptions/my-subscription
+
+gcloud beta logging logs list
+gcloud beta logging logs delete LOG_NAME
+
+node cloudiot_mqtt_example_nodejs.js \
+mqttDeviceDemo \
+--projectId=iot-watertank \
+--cloudRegion=asia-east1 \
+--registryId=watertank-registry \
+--deviceId=tank-b1 \
+--privateKeyFile=rsa_private.pem \
+--numMessages=25 \
+--algorithm=RS256
