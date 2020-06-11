@@ -1,0 +1,32 @@
+[ req ]
+distinguished_name  = dn
+string_mask         = utf8only
+default_md          = sha256
+x509_extensions     = rootca_cert
+
+[ dn ]
+
+[ rootca_cert ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+basicConstraints = critical, CA:true
+keyUsage = critical, digitalSignature, keyEncipherment, dataEncipherment, keyAgreement, keyCertSign, cRLSign
+#, nonRepudiation, encipherOnly, decipherOnly
+
+[ client_cert ]
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = *.iot.*.amazonaws.com
+
+[ server_cert ]
+basicConstraints = critical, CA:TRUE, pathlen:0
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always

@@ -16,6 +16,7 @@ zip
 dist
 .cache
 local.*
+**/*.srl
 
 # Logs
 logs
