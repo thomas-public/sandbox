@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "thomas@acrosome.com",
+  "license": "UNLICENSED",
   "devDependencies": {
     "jest": "^26.0.1"
   }

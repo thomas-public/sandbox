@@ -1,5 +1,5 @@
 {
-  "name": "jwt",
+  "name": "@acrosome/jose",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,6 @@
   "author": "thomas@acrosome.com",
   "license": "UNLICENSED",
   "dependencies": {
-    "jsonwebtoken": "^8.5.1"
+    "jose": "^1.27.1"
   }
 }
