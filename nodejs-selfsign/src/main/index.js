@@ -2,8 +2,8 @@ const fs = require( "fs" );
 const forge = require( "node-forge" );
 const subject = [ { "value": "TW", "shortName": "C" }, { "value": "TEST", "shortName": "O" }, { "value": "TEST UNIT", "shortName": "OU" }, { "value": "TEST CLIENT", "shortName": "CN" } ];
 
-const rootcaCrt = forge.pki.certificateFromPem( fs.readFileSync( "./rootca/rootca.crt.pem", 'utf-8' ) );
-const rootcaPriKey = forge.pki.privateKeyFromPem( fs.readFileSync( "./rootca/rootca.pri.pem", 'utf-8' ) );
+const rootcaCrt = forge.pki.certificateFromPem( fs.readFileSync( "../../../certs/certs/rootca.crt.pem", 'utf-8' ) );
+const rootcaPriKey = forge.pki.privateKeyFromPem( fs.readFileSync( "../../../certs/keys/rootca.pri.pem", 'utf-8' ) );
 
 // generate client key pair and csr
 const clientKeyPair = forge.pki.rsa.generateKeyPair( 2048 );

@@ -1,14 +1,17 @@
 {
-  "name": "@acrosome/jose",
+  "name": "@acrosome/jose-test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "thomas@acrosome.com",
   "license": "UNLICENSED",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
   "dependencies": {
-    "jose": "^1.27.1"
+    "otplib": "^12.0.1"
   }
 }
