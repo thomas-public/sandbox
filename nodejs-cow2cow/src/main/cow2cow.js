@@ -7,7 +7,7 @@ module.exports.loadKey = ( key, options ) =>
 	return JWK.asKey( key, options );
 };
 
-module.exports.signJWT = ( payload, privateKey, options ) =>
+module.exports.signJWS = ( payload, privateKey, options ) =>
 {
 	const jwt = JWT.sign( payload, privateKey, options );
 	console.log( `${privateKey.kty} jwt:`, jwt );
@@ -28,7 +28,7 @@ module.exports.decryptJWE = ( jwe, privateKey ) =>
 	return clear;
 };
 
-module.exports.verifyJWT = ( jwt, publicKey ) =>
+module.exports.verifyJWS = ( jwt, publicKey ) =>
 {
 	const valid = JWT.verify( jwt, publicKey );
 	console.log( `${publicKey.kty} valid:`, valid );
