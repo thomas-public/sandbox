@@ -1,9 +1,9 @@
 ### generate RSA private keys
 # mkdir keys
-openssl ecparam -name secp384r1 -genkey -out keys/ecc.rootca.pri.pem
-openssl ecparam -name secp384r1 -genkey -out keys/ecc.server.pri.pem
-openssl ecparam -name secp384r1 -genkey -out keys/ecc.device.pri.pem
-openssl ecparam -name secp384r1 -genkey -out keys/ecc.client.pri.pem
+openssl ecparam -name secp521r1 -genkey -out keys/ecc.rootca.pri.pem
+openssl ecparam -name secp521r1 -genkey -out keys/ecc.server.pri.pem
+openssl ecparam -name secp521r1 -genkey -out keys/ecc.device.pri.pem
+openssl ecparam -name secp521r1 -genkey -out keys/ecc.client.pri.pem
 
 openssl ec -in keys/ecc.rootca.pri.pem -pubout -out keys/ecc.rootca.pub.pem
 openssl ec -in keys/ecc.server.pri.pem -pubout -out keys/ecc.server.pub.pem

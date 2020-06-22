@@ -2,25 +2,24 @@
 
 const { JWK, JWT, JWE } = require( "jose" );
 
-module.exports.loadKey = ( key, options)  =>
+module.exports.loadKey = ( key, options ) =>
 {
-	return JWK.asKey(key, options);
+	return JWK.asKey( key, options );
 };
 
-module.exports.signJWT = ( payload, privateKey, options )=>
+module.exports.signJWT = ( payload, privateKey, options ) =>
 {
-	const jwt = JWT.sign( payload, privateKey, options);
+	const jwt = JWT.sign( payload, privateKey, options );
 	console.log( `${privateKey.kty} jwt:`, jwt );
 	return jwt;
 };
 
-module.exports.encryptJWE = ( clear, publicKey ) =>
+module.exports.encryptJWE = ( clear, publicKey, protectedHeader ) =>
 {
-	const jwe = JWE.encrypt( clear, publicKey, { enc: "A256CBC-HS512" } );
+	const jwe = JWE.encrypt( clear, publicKey, protectedHeader );
 	console.log( `${publicKey.kty} jwe:`, jwe );
 	return jwe;
 };
-
 
 module.exports.decryptJWE = ( jwe, privateKey ) =>
 {
