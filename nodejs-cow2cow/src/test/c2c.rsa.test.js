@@ -19,7 +19,7 @@ test( "test jwejwt", () =>
 	{
 		iss: "dpp",
 		aud: "dps",
-		otp: totp.generate( client_pri_key.kid )
+		otp: totp.generate( client_pri_key.toPEM() )
 	};
 
 	// client steps
@@ -35,5 +35,5 @@ test( "test jwejwt", () =>
 
 	const clear = cow2cow.decryptJWE( jwe, server_pri_key );
 	const valid = cow2cow.verifyJWS( clear, client_pub_key );
-	expect( totp.verify( { token: valid.otp, secret: client_pub_key.kid } ) ).toBeTruthy();
+	expect( totp.verify( { token: valid.otp, secret: client_pub_key.toPEM() } ) ).toBeTruthy();
 } );
