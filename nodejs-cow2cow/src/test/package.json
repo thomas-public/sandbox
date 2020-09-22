@@ -9,7 +9,7 @@
   "author": "thomas@acrosome.com",
   "license": "UNLICENSED",
   "devDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.4.2"
   },
   "dependencies": {
     "otplib": "^12.0.1"

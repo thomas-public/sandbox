@@ -1,0 +1,19 @@
+-   name: run lambda delete functions
+    tags: always
+    debug:
+        msg: "region: {{ params.0 }}"
+
+-   set_fact:
+        region: "{{ params.0 }}"
+
+-   name: List all function
+    lambda_info:
+        region: "{{ region }}"
+    register: ret_lambda_info
+
+-   name: delete lambda function
+    loop: "{{ ret_lambda_info['function'] | flatten }}"
+    lambda:
+        region: "{{ region }}"
+        state: absent
+        name: "{{ item }}"
