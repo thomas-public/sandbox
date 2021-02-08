@@ -1,5 +1,5 @@
 ---
--   name: aws management
+-   name: aws resource management ansible
     hosts: localhost
     connection: local
     gather_facts: false
@@ -10,11 +10,10 @@
         -   us-east-1
         -   us-east-2
         -   us-west-1
-        -   us-west-2
-        -   ap-northeast-1
+        # -   us-west-2
+        # -   ap-northeast-1
 
         ansible_roles:
-        # -   aws_facts
         # -   ddb_ondemand
         # -   ddb_delete
         # -   logs_delete
